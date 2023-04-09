@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Stack {
     private int n;
     private char elements[];
