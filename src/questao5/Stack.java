@@ -1,66 +1,62 @@
 package questao5;
 
-public class Stack {
-    private int n;
-    private char elements[];
-    private int top;
+import java.util.Scanner;
 
-    public Stack(int size) {
-        n = size;
-        elements = new char[size];
-        top = -1;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().toLowerCase();
+        Stack stack = convertsStringToStack(input);
+        confereBalanceado(stack, input.length());
     }
 
-    public boolean empty() {
-        return top == -1;
-    }
 
-    public boolean full() {
-        return top == n - 1;
-    }
-
-    public char pop() {
-        char c = '\0';
-
-        if (!empty()) {
-            c = elements[top];
-            top--;
-        } else {
-            System.out.println("Pilha vazia: pop não funcionou.");
+    public static void confereBalanceado(Stack stack, int length) {
+        Stack ultimoTras = new Stack(length);
+        while (!stack.empty()) {
+            char temp = stack.pop();
+            if (ehChave(temp)) {
+                if(estaParaTras(temp)) {
+                    ultimoTras.push(temp);
+                }
+                else {
+                    if (ultimoTras.empty()) {
+                        System.out.println("Erro");
+                        return;
+                    }
+                    if (!saoEquivalentes(temp, ultimoTras.pop())) {
+                        System.out.println("Erro");
+                        return;
+                    }
+                }
+            }
         }
-
-        return c;
+        System.out.println("deu certo :)");
     }
 
-    public boolean push(char element) {
-        if (!full()) {
-            elements[++top] = element;
-            return true;
-        }
-        System.out.println("Pilha cheia: push não funcionou.\n");
+    // ], ) e }
+    public static boolean estaParaTras(char c) {
+        return c == ']' || c == ')' || c == '}';
+    }
+
+    public static boolean ehChave(char c) {
+        return c == ']' || c == ')' || c == '}' || c == '[' || c == '(' || c == '{';
+    }
+
+    // checa se são equivalentes, ou seja, (), [], {}
+    public static boolean saoEquivalentes(char c1, char c2) {
+        if (c1 == '(') return c2 == ')';
+        if (c1 == '[') return c2 == ']';
+        if (c1 == '{') return c2 == '}';
         return false;
-    }
-
-    public char returnsTop() {
-        char element = '\0';
-
-        if (!empty())
-            element = elements[top];
-        else
-            System.out.println("Pilha vazia.");
-        return element;
     }
 
 
     public static Stack convertsStringToStack(String string) {
+
         Stack stack = new Stack(string.length());
         for (int i = 0; i < string.length(); i++)
             stack.push(string.charAt(i));
         return stack;
     }
-
-    public int size() {
-        return top + 1;
-    }
-
 }
