@@ -37,7 +37,8 @@ public class Main {
             }
             stack.push(input.charAt(i));
         }
-        if (!foundD) {
+        
+        if (!isPalindrom(stack) || !foundD) {
             System.out.println("Você não seguiu as intruções");
             return;
         }
