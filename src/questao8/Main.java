@@ -19,7 +19,7 @@ public class Main {
         // assumindo que serão digitados pelo menos 2 números
         PilhaGenerica<int[]> stack = new PilhaGenerica<>(sortedArray.length - 1);
         PilhaGenerica<Integer> stackNumbers = arrayToStack(sortedArray);
-        int temp = Integer.MIN_VALUE;
+        int temp;
         while (!stackNumbers.vazia()) {
             int temp2 = stackNumbers.pop();
             if (temp2 == sortedArray[0])
