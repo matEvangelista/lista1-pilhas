@@ -2,31 +2,33 @@ package questao8;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = {5, 14, 8, 7, 3, 9};
+        int[] array = {1, 2, 3, 4, 5};
         printsSubArrays(array);
     }
 
     public static void printsSubArrays(int[] array) {
-        sortArray(array);
-        PilhaGenerica<int[]> stack = returnsSubArrays(array);
+        PilhaGenerica<PilhaGenerica<Integer>> stack = returnsSubArrays(array);
         while (!stack.vazia()) {
-            int[] pop = stack.pop();
-            System.out.printf("(%d, %d)\n", pop[0], pop[1]);
+            PilhaGenerica<Integer> subSequences = stack.pop();
+            System.out.printf("(%d, %d)\n", subSequences.pop(), subSequences.pop());
         }
     }
 
-    public static PilhaGenerica<int[]> returnsSubArrays(int[] sortedArray) {
+    public static PilhaGenerica<PilhaGenerica<Integer>> returnsSubArrays(int[] sortedArray) {
         // assumindo que serão digitados pelo menos 2 números
-        PilhaGenerica<int[]> stack = new PilhaGenerica<>(sortedArray.length - 1);
+        PilhaGenerica<PilhaGenerica<Integer>> stack = new PilhaGenerica<>(sortedArray.length - 1);
         PilhaGenerica<Integer> stackNumbers = arrayToStack(sortedArray);
-        int temp;
+        int temp1, temp2;
         while (!stackNumbers.vazia()) {
-            int temp2 = stackNumbers.pop();
-            if (temp2 == sortedArray[0])
+            temp1 = stackNumbers.pop();
+            if (sortedArray[0] == temp1) // naturalmente, o menor da lista não vai ser maior que qualquer um
                 break;
-            temp = stackNumbers.pop();
-            stack.push(new int[]{temp2, temp});
-            stackNumbers.push(temp);
+            temp2 = stackNumbers.pop();
+            PilhaGenerica<Integer> tempStack = new PilhaGenerica<>(2);
+            tempStack.push(temp2);
+            tempStack.push(temp1);
+            stack.push(tempStack);
+            stackNumbers.push(temp2); // o segundo maior vai para o topo
         }
         return stack;
     }
@@ -38,15 +40,4 @@ public class Main {
         return stack;
     }
 
-    public static void sortArray(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                int temp = array[i];
-                if (array[i] < array[j]) {
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-            }
-        }
-    }
 }
