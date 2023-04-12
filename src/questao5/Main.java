@@ -7,21 +7,31 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().toLowerCase();
         Stack stack = convertsStringToStack(input);
+        confereBalanceado(stack, input.length());
     }
 
-    // [a(v(b){b})b]
 
     public static void confereBalanceado(Stack stack, int length) {
-        Stack stackAuxiliar = new Stack(length);
+        Stack ultimoTras = new Stack(length);
         while (!stack.empty()) {
             char temp = stack.pop();
             if (ehChave(temp)) {
-                char tempAuxiliar = stackAuxiliar.pop();
-                if (!estaParaTras(temp)) {
-
+                if(estaParaTras(temp)) {
+                    ultimoTras.push(temp);
+                }
+                else {
+                    if (ultimoTras.empty()) {
+                        System.out.println("Erro");
+                        return;
+                    }
+                    if (!saoEquivalentes(temp, ultimoTras.pop())) {
+                        System.out.println("Erro");
+                        return;
+                    }
                 }
             }
         }
+        System.out.println("deu certo :)");
     }
 
     // ], ) e }
