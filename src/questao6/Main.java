@@ -1,13 +1,13 @@
 package questao6;
 
 /*
-* como foi feito: Pilha genérica de stacks. Cada stack representa uma palavra
-* primeiro, crio uma instância da Pilha Genérica de Stacks com o comprimento igual ao número de palavras
-* depois, coloco cada palavra em uma Stack e a inverto
+ * como foi feito: Pilha genérica de stacks. Cada stack representa uma palavra
+ * primeiro, crio uma instância da Pilha Genérica de Stacks com o comprimento igual ao número de palavras
+ * depois, coloco cada palavra em uma Stack e a inverto
  */
 public class Main {
     public static void main(String[] args) {
-        String string = "a maçã está podre";
+        String string = "os circuitos de consagração social serão tão mais eficazes à medida que o objeto social se afasta do objeto consagrado";
         System.out.println(reversesWords(string));
     }
 
