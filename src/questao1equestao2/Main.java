@@ -1,8 +1,12 @@
+package questao1equestao2;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        questao1(scanner);
+        questao2(scanner);
     }
 
     public static void questao1(Scanner scanner) {

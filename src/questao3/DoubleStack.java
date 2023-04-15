@@ -1,4 +1,4 @@
-/*
+package questao3;/*
  * Como esta classe funciona?
  * Há apenas um array char, que será dividido em duas partes.
  * A primeira parte abrigará uma pilha normal.
@@ -51,11 +51,5 @@ public class DoubleStack {
         c = stackItself[lastStackBegins++];
         return c;
     }
-
-    public void prints() {
-        for (char c : stackItself)
-            System.out.print(" " + c);
-    }
-
 
 }

@@ -1,3 +1,5 @@
+package questao7;
+
 public class Stack {
     private int n;
     private char elements[];
