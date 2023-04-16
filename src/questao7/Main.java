@@ -21,11 +21,13 @@ public class Main {
     }
 
     public static String stackToString(PilhaGenerica<Character> stack) {
-        StringBuilder result = new StringBuilder("");
-        while (!stack.vazia()){
-            result.append(stack.pop());
-        }
-        return result.reverse().toString();
+        PilhaGenerica<Character> aux = new PilhaGenerica<>(stack.tamanho());
+        String s = "";
+        while (!stack.vazia())
+            aux.push(stack.pop());
+        while (!aux.vazia())
+            s += aux.pop();
+        return s;
     }
 
     private static PilhaGenerica<Character> stringToPostfixStack(String string) {
