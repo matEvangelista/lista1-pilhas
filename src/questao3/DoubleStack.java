@@ -3,25 +3,28 @@ package questao3;/*
  * Há apenas um array char, que será dividido em duas partes.
  * A primeira parte abrigará uma pilha normal.
  * A segunda abrigará uma pilha invertida, de forma que ela começa na posição
- * (length - 1) e os seus métodos de push (pop) colocam (removem) elementos na posição length - 1 - n
+ * (length - 1) e os seus métodos de push (pop) colocam (removem) elementos no meio do array stackItself
  */
 
 public class DoubleStack {
 
     private char[] stackItself;
     private int length;
+
     // começa em -1 para o primeiro push ser na posição 0
-    private int firstStackEnds = -1;
+    private int firstStackEnds;
+
     // começa na posição length, apesar de não existir, para o primeiro push ser na posição length - 1;
     private int lastStackBegins;
 
     public DoubleStack(int length) {
         this.length = length;
+        firstStackEnds = -1;
         lastStackBegins = length;
         stackItself = new char[length];
     }
 
-    // a primeira pilha estará cheia se ela terminar onde a segunda termina
+    // a DoubleStack estará cheia sse a primeria pilha termina onde a segunda começa
     public boolean isFull() {
         return (firstStackEnds + 1) == lastStackBegins;
     }
