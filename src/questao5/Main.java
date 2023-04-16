@@ -4,27 +4,31 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.print("Digite algo com parênteses, chaves e colchetes. Depois, diremos se você o fez corretamente: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().toLowerCase();
-        Stack stack = convertsStringToStack(input);
-        confereBalanceado(stack, input.length());
+        questao5(input);
     }
 
+    public static void questao5(String string) {
+        Stack stack = stringToStack(string);
+        confereBalanceado(stack);
+    }
 
-    public static void confereBalanceado(Stack stack, int length) {
-        Stack ultimoTras = new Stack(length);
+    public static void confereBalanceado(Stack stack) {
+        Stack closingBrackets = new Stack(stack.size());
         while (!stack.empty()) {
             char temp = stack.pop();
-            if (ehChave(temp)) {
-                if(estaParaTras(temp)) {
-                    ultimoTras.push(temp);
+            if (isBracket(temp)) {
+                if(closingBracket(temp)) {
+                    closingBrackets.push(temp);
                 }
                 else {
-                    if (ultimoTras.empty()) {
+                    if (closingBrackets.empty()) {
                         System.out.println("Erro");
                         return;
                     }
-                    if (!saoEquivalentes(temp, ultimoTras.pop())) {
+                    if (!areEquivalent(temp, closingBrackets.pop())) {
                         System.out.println("Erro");
                         return;
                     }
@@ -35,16 +39,16 @@ public class Main {
     }
 
     // ], ) e }
-    public static boolean estaParaTras(char c) {
+    public static boolean closingBracket(char c) {
         return c == ']' || c == ')' || c == '}';
     }
 
-    public static boolean ehChave(char c) {
-        return c == ']' || c == ')' || c == '}' || c == '[' || c == '(' || c == '{';
+    public static boolean isBracket(char c) {
+        return closingBracket(c) || c == '[' || c == '(' || c == '{';
     }
 
     // checa se são equivalentes, ou seja, (), [], {}
-    public static boolean saoEquivalentes(char c1, char c2) {
+    public static boolean areEquivalent(char c1, char c2) {
         if (c1 == '(') return c2 == ')';
         if (c1 == '[') return c2 == ']';
         if (c1 == '{') return c2 == '}';
@@ -52,7 +56,7 @@ public class Main {
     }
 
 
-    public static Stack convertsStringToStack(String string) {
+    public static Stack stringToStack(String string) {
 
         Stack stack = new Stack(string.length());
         for (int i = 0; i < string.length(); i++)

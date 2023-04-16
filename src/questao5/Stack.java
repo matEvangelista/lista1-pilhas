@@ -59,6 +59,7 @@ public class Stack {
         return stack;
     }
 
+    // autorizado pelo professor
     public int size() {
         return top + 1;
     }
