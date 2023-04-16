@@ -5,44 +5,41 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        questao1(scanner);
-        questao2(scanner);
+        System.out.println();
+        // assumi que o usuário não vai digitar espaços entre as palavras
+        System.out.print("Digite um palíndromo conforme pede a questão 1, sem espaços: ");
+        String input = scanner.nextLine().toLowerCase();
+        questao1(input);
+
+        System.out.print("Digite uma string segundo as intruções da questão 2, sem espaços: ");
+        input = scanner.nextLine().toLowerCase();
+        questao2(input);
     }
 
-    public static void questao1(Scanner scanner) {
-
-        // assumi que o utilizador não vai digitar espaços ou outras maluquices
-        System.out.print("Digite um palíndromo conforme pede a questão 1: ");
-        String input = scanner.nextLine().toLowerCase();
-        if (isPalindrom(convertsStringToStack(input))) System.out.println("Você digitou um palíndromo :)");
+    public static void questao1(String input) {
+        if (isPalindrome(stringToStack(input))) System.out.println("Você digitou um palíndromo :)");
         else System.out.println("Você não seguiu as intruções como deveria");
     }
 
-    public static void questao2(Scanner scanner) {
-
+    public static void questao2(String input) {
         boolean foundD = false;
-
-        System.out.print("Digite uma string segundo as intruções da questão 2: ");
-        String input = scanner.nextLine().toLowerCase();
-        //###### GAMBIARRA TODO melhorar
-        Stack stack = new Stack(100); // valor alto para não dar problema
-        // mas pode dar problema
+        Stack stack = new Stack(input.length()); // valor alto para não dar problema
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == 'd') {
                 foundD = true;
-                // não pode começar nem terminar com a letra D e a stack formada com os caracteres precisa
+                // não pode começar nem terminar com a letra D, e a stack formada com os caracteres precisa
                 // ser da forma x c y
-                if (i + 1 == input.length() || i == 0 || !isPalindrom(stack)) {
+                if (i + 1 == input.length() || i == 0 || !isPalindrome(stack)) {
                     System.out.println("Você não seguiu as intruções como deveria");
                     return;
                 }
-                stack = new Stack(100); // "renova" a pilha
+                stack = new Stack(input.length()); // "renova" a pilha
                 continue;
             }
-            stack.push(input.charAt(i));
+            stack.push(input.charAt(i)); // adiciona o char da posição i à stack
         }
         
-        if (!isPalindrom(stack) || !foundD) {
+        if (!isPalindrome(stack) || !foundD) {
             System.out.println("Você não seguiu as intruções");
             return;
         }
@@ -51,8 +48,8 @@ public class Main {
 
     }
 
-    // apenas coloca a ‘string’ numa instância da classe Stack
-    public static Stack convertsStringToStack(String string) {
+    // apenas coloca a string numa instância da classe Stack
+    public static Stack stringToStack(String string) {
 
         Stack stack = new Stack(string.length());
         for (int i = 0; i < string.length(); i++)
@@ -61,7 +58,7 @@ public class Main {
     }
 
     // retorna se está na forma como descrito no exercício 1
-    public static boolean isPalindrom(Stack stack) {
+    public static boolean isPalindrome(Stack stack) {
         /* naturalmente, não pode ser um número par já que, necessariamente, há uma letra C partindo
          * a ‘string’ em dois pedaços iguais*/
         if (stack.size() % 2 == 0) return false;
