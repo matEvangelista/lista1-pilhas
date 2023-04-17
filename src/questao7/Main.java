@@ -2,17 +2,21 @@ package questao7;
 
 /* como funciona esta questão?
  * Comecei removendo os espaços em branco da string de entrada
- * Depois,
+ * Depois, coloquei a entrada na notação pós-fixada
+ * Por fim, fiz a conta com esta notação.
  * */
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // como dito em aula, são considerados apenas números de um dígito.
-        String s = "( 9 - ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
-        printsAnswer(s);
+        System.out.print("Digite uma expressão aritmética: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        questao7(input);
     }
 
-    public static void printsAnswer(String input) {
+    public static void questao7(String input) {
         String s;
         PilhaGenerica<Character> stack = stringToPostfixStack(input);
         s = stackToString(stack);
