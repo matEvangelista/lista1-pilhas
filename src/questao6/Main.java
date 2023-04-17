@@ -1,5 +1,7 @@
 package questao6;
 
+import java.util.Scanner;
+
 /*
  * como foi feito: Pilha genérica de stacks. Cada stack representa uma palavra
  * primeiro, crio uma instância da Pilha Genérica de Stacks com o comprimento igual ao número de palavras
@@ -7,9 +9,10 @@ package questao6;
  */
 public class Main {
     public static void main(String[] args) {
-        String string = "os circuitos de consagração social serão tanto mais eficazes à medida que o objeto" +
-                " social se afasta do objeto consagrado";
-        System.out.println(reversesWords(string));
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite algo: ");
+        String input = scanner.nextLine().trim();
+        System.out.println(reversesWords(input));
     }
 
     public static String reversesWords(String string) {
@@ -52,7 +55,7 @@ public class Main {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ' ') len++;
         }
-        return ++len; // 3 espaços significam 4 palavras
+        return ++len; // n espaços significam n + 1 palavras
     }
 
 }
