@@ -2,11 +2,11 @@ package questao8;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5};
-        printsSubArrays(array);
+        int[] array = {1, 2, 3, 4, 5, 10, 19, 900};
+        questao8(array);
     }
 
-    public static void printsSubArrays(int[] array) {
+    public static void questao8(int[] array) {
         PilhaGenerica<PilhaGenerica<Integer>> stack = returnsSubArrays(array);
         while (!stack.vazia()) {
             PilhaGenerica<Integer> subSequences = stack.pop();

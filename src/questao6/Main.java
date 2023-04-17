@@ -12,10 +12,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite algo: ");
         String input = scanner.nextLine().trim();
-        System.out.println(reversesWords(input));
+        System.out.println(questao6(input));
     }
 
-    public static String reversesWords(String string) {
+    public static String questao6(String string) {
         String result = "";
         int len = numberOfWords(string);
         int strLen = string.length();
